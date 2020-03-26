@@ -1,5 +1,5 @@
 /* Copyright (c) 2015, The Linux Foundation. All rights reserved.
- * Copyright (C) 2017 XiaoMi, Inc.
+ * Copyright (C) 2019 XiaoMi, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -264,7 +264,7 @@
 		qcom,dispblnotify-enabled;
 		qcom,dispparam-enabled;
 		qcom,disp-paneloff-disablecabc-enabled;
-		qcom,mdss-night-brightness = <7 25 43 61>;
+		qcom,mdss-night-brightness = <1 7 25 43 61>;
 		qcom,mdss-dsi-panel-xy-coordinate = <0xA1 0x0F 0x18>;
 		qcom,mdss-dsi-dispparam-skin-ce-command = [
 				15 01 00 00 00 00 02 55 83
