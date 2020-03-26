@@ -252,6 +252,81 @@ config CPU_FREQ_GOV_SCHEDUTIL
 	  both cases.
 
 	  If in doubt, say N.
+	  
+config DSBOOST
+	tristate "Dynamic SchedTune Boosting on events"
+	depends on DYNAMIC_STUNE_BOOST
+	help
+	  This driver attempts to improve responsiveness on mobile devices
+	  with Dynamic SchedTune Boosting support. Boosts are applied on
+	  user input, after user input unboosts, and on a sched_boost trigger.
+
+	  If in doubt, say N.
+
+if DSBOOST
+
+config INPUT_BOOST_DURATION
+	int "Input boost duration"
+	default "64"
+	help
+	  Default duration to boost on input.
+
+config INPUT_STUNE_BOOST
+	int "Input SchedTune boost level"
+	default "15"
+	help
+	  Default SchedTune boost level for the top-app cgroup.
+
+	  A value of 0 disables SchedTune boosting for this level.
+
+config SCHED_STUNE_BOOST
+	int "Sched SchedTune boost level"
+	default "12"
+	help
+	  Default SchedTune boost level for the top-app cgroup for
+	  sched_boost calls.
+
+	  A value of 0 disables SchedTune boosting for this level.
+
+endif
+
+config CPU_INPUT_BOOST
+	bool "CPU Input Boost"
+	help
+	  Boosts the CPU on touchscreen and touchpad input, and allows for
+	  boosting on other custom events, mainly which is intended to be for
+	  boosting when there is a new frame ready to be rendered to the
+	  display. The boost frequencies for this driver should be set so that
+	  frame drops are near-zero at the boosted frequencies and power
+	  consumption is minimized at said frequency combination.
+
+if CPU_INPUT_BOOST
+
+config INPUT_BOOST_DURATION_MS
+	int "Input boost duration"
+	default "100"
+	help
+	  Input boost duration in milliseconds.
+
+config WAKE_BOOST_DURATION_MS
+	int "Wake boost duration"
+	default "1000"
+	help
+	  Wake boost duration in milliseconds.
+
+config INPUT_BOOST_FREQ_LP
+	int "Low-power cluster boost freq"
+	default "0"
+	help
+	  Input boost frequency for the low-power CPU cluster.
+
+config INPUT_BOOST_FREQ_PERF
+	int "Performance cluster boost freq"
+	default "0"
+	help
+	  Input boost frequency for the performance CPU cluster.
+
+endif
 
 comment "CPU frequency scaling drivers"
 
