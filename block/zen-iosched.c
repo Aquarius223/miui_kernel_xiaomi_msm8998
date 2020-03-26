@@ -3,12 +3,9 @@
  * Primarily based on Noop, deadline, and SIO IO schedulers.
  *
  * Copyright (C) 2012 Brandon Berhent <bbedward@gmail.com>
-<<<<<<< HEAD
  *           (C) 2014 LoungeKatt <twistedumbrella@gmail.com>
  *           (c) 2015 Fixes to stop crashing on 3.10 by Matthew Alex <matthewalex@outlook.com>
  *           (c) 2016 POrt and fixes for Linux 3.18 by engstk <eng.stk@sapo.pt>
-=======
->>>>>>> d33f13535c2f... block: Add ZEN v2 scheduler
  *
  * FCFS, dispatches are back-inserted, deadlines ensure fairness.
  * Should work best with devices where there is no travel delay.
@@ -97,11 +94,7 @@ zen_expired_request(struct zen_data *zdata, int ddir)
                 return NULL;
 
         rq = rq_entry_fifo(zdata->fifo_list[ddir].next);
-<<<<<<< HEAD
-        if (time_after_eq(jiffies, rq->fifo_time))
-=======
         if (time_after(jiffies, rq->fifo_time))
->>>>>>> d33f13535c2f... block: Add ZEN v2 scheduler
                 return rq;
 
         return NULL;
@@ -169,7 +162,6 @@ static int zen_dispatch_requests(struct request_queue *q, int force)
 static int zen_init_queue(struct request_queue *q, struct elevator_type *e)
 {
 	struct zen_data *zdata;
-<<<<<<< HEAD
     struct elevator_queue *eq;
     
     eq = elevator_alloc(q, e);
@@ -187,8 +179,7 @@ static int zen_init_queue(struct request_queue *q, struct elevator_type *e)
     spin_lock_irq(q->queue_lock);
 	q->elevator = eq;
 	spin_unlock_irq(q->queue_lock);
-	
-=======
+
 	struct elevator_queue *eq;
 
 	eq = elevator_alloc(q, e);
@@ -202,19 +193,15 @@ static int zen_init_queue(struct request_queue *q, struct elevator_type *e)
 	}
 	eq->elevator_data = zdata;
 
->>>>>>> d33f13535c2f... block: Add ZEN v2 scheduler
 	INIT_LIST_HEAD(&zdata->fifo_list[SYNC]);
 	INIT_LIST_HEAD(&zdata->fifo_list[ASYNC]);
 	zdata->fifo_expire[SYNC] = sync_expire;
 	zdata->fifo_expire[ASYNC] = async_expire;
 	zdata->fifo_batch = fifo_batch;
-<<<<<<< HEAD
-=======
 
 	spin_lock_irq(q->queue_lock);
 	q->elevator = eq;
 	spin_unlock_irq(q->queue_lock);
->>>>>>> d33f13535c2f... block: Add ZEN v2 scheduler
 	return 0;
 }
 
@@ -320,7 +307,3 @@ MODULE_AUTHOR("Brandon Berhent");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Zen IO scheduler");
 MODULE_VERSION("1.1");
-<<<<<<< HEAD
-
-=======
->>>>>>> d33f13535c2f... block: Add ZEN v2 scheduler
